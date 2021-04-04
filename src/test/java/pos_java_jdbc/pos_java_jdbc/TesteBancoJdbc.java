@@ -12,42 +12,59 @@ public class TesteBancoJdbc {
 	@Test
 	public void initBanco() {
 		UserPosDAO userPosDAO = new UserPosDAO();
-		Userposjava userposjava = new Userposjava();  
-		
+		Userposjava userposjava = new Userposjava();
+
 		userposjava.setId(5L);
 		userposjava.setNome("edson da costa");
 		userposjava.setEmail("edson@hotmail.com ");
-		
+
 		userPosDAO.salvar(userposjava);
 	}
-	
+
 	@Test
 	public void initListar() {
 		UserPosDAO dao = new UserPosDAO();
 		try {
 			List<Userposjava> list = dao.listar();
-		
+
 			for (Userposjava userposjava : list) {
 				System.out.println(userposjava);
 				System.out.println("================================================================");
 			}
-		
-		}catch (Exception e) {
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void initBuscar() {
+		UserPosDAO dao = new UserPosDAO();
+
+		try {
+			Userposjava userposjava = dao.buscar(3L);
+
+			System.out.println(userposjava);
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
 	@Test
-	public void initBuscar() {
-		UserPosDAO dao = new UserPosDAO();
-		
+	public void initAtualizar() {
 		try {
-		Userposjava userposjava = dao.buscar(3L);
-		
-		System.out.println(userposjava);
-		
-		}catch (Exception e) {
+			UserPosDAO dao = new UserPosDAO();
+
+			Userposjava objetoBanco = dao.buscar(5L);
+			
+			objetoBanco.setNome("edson da costa");
+			
+			dao.atualizar(objetoBanco);
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 }
